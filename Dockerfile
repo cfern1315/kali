@@ -1,7 +1,5 @@
 FROM kalilinux/kali-rolling
 
-ENV DEBIAN_FRONTEND noninteractive
-
 RUN apt-get install kali-linux-full -y
 RUN echo "parseword" | passwd --stdin $USER
 RUN apt-get update -y && apt-get install ssh -y
