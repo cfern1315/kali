@@ -2,33 +2,10 @@ FROM kalilinux/kali-rolling
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -y && \
-apt-get install -y \ 
-net-tools \
-openbox \
-git \ 
-x11vnc \
-xvfb \
-wget \
-python \
-python-numpy \
-unzip \
-geany && \
-cd /root && git clone https://github.com/kanaka/noVNC.git && \
-cd noVNC/utils && git clone https://github.com/kanaka/websockify websockify && \
-cd /root
-ADD startup.sh /startup.sh
-
-RUN chmod 0755 /startup.sh && \
-apt-get autoremove -y && \
+RUN apt-get install kali-linux-full -y
+RUN echo "parseword" | passwd --stdin $USER
+RUN apt-get update -y && apt-get install ssh -y
+RUN apt-get autoremove -y && \
 rm -rf /var/lib/apt/lists/*
 
-#The Kali Docker Image Is Out Of Date. : (
-RUN apt-get update -y && apt-get dist-upgrade -y
-
-RUN apt-get install -y kali-linux-full
-
-RUN apt-get install -y firefox ubuntu-gnome-desktop 
-RUN apt-get install -y gnome
-
-CMD /startup.sh
+CMD service ssh start && update-rc.d -f ssh remove && update-rc.d -f ssh defaults
