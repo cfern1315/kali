@@ -1,5 +1,6 @@
 FROM kalilinux/kali-rolling
 
+RUN apt-get install -y apt-transport-https
 RUN apt-get install kali-linux-full -y
 RUN echo "parseword" | passwd --stdin $USER
 RUN apt-get update -y && apt-get install ssh -y
