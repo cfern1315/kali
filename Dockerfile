@@ -1,7 +1,7 @@
 FROM kalilinux/kali-rolling
 
 RUN apt-get install -y apt-transport-https
-RUN echo "parseword" | passwd --stdin $USER
+#RUN echo "parseword" | passwd --stdin $USER
 RUN apt-get update -y && apt-get install ssh -y
 RUN apt-get autoremove -y && \
 rm -rf /var/lib/apt/lists/*
